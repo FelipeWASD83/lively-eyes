@@ -1,0 +1,33 @@
+{
+  "key.categories.lively_eyes": "Lively Eyes",
+  "key.lively_eyes.wink": "Wink",
+
+  "lively_eyes.command.loading": "Your skin has not loaded yet. Try again in a second.",
+  "lively_eyes.command.found": "Eyes found on your skin's face: right eye at %1$s, left eye at %2$s (score %3$s).%4$s",
+  "lively_eyes.command.eye": "column %1$s, row %2$s of the face",
+  "lively_eyes.command.can_gaze": " The eyes can look sideways.",
+  "lively_eyes.command.can_half": " The eyes can half-close.",
+  "lively_eyes.command.not_found": "No eyes found on your skin: %s. It stays without expressions.",
+  "lively_eyes.failure.not_64x64": "the skin is not 64x64 (HD skins are left out)",
+  "lively_eyes.failure.no_skin_tone": "the face has no clear skin tone (mask or helmet?)",
+  "lively_eyes.failure.no_pair": "there are no two mirrored eyes on the face",
+  "lively_eyes.failure.too_weak": "the best guess was too weak",
+
+  "lively_eyes.configuration.title": "Lively Eyes",
+  "lively_eyes.configuration.enabled": "Enabled",
+  "lively_eyes.configuration.enabled.tooltip": "Turns every expression on or off.",
+  "lively_eyes.configuration.blink": "Blink",
+  "lively_eyes.configuration.blink.tooltip": "Blinks now and then, sometimes twice in a row.",
+  "lively_eyes.configuration.blinkMinSeconds": "Shortest time between blinks",
+  "lively_eyes.configuration.blinkMinSeconds.tooltip": "In seconds.",
+  "lively_eyes.configuration.blinkMaxSeconds": "Longest time between blinks",
+  "lively_eyes.configuration.blinkMaxSeconds.tooltip": "In seconds.",
+  "lively_eyes.configuration.gaze": "Look around",
+  "lively_eyes.configuration.gaze.tooltip": "Eyes follow whoever is close and glance sideways now and then. Only on skins whose eye has white and iris side by side.",
+  "lively_eyes.configuration.hurt": "Wince when hurt",
+  "lively_eyes.configuration.hurt.tooltip": "Squeezes the eyes shut when taking damage.",
+  "lively_eyes.configuration.sleep": "Eyes closed in bed",
+  "lively_eyes.configuration.sleep.tooltip": "Eyes stay closed while sleeping.",
+  "lively_eyes.configuration.tired": "Tired on low health",
+  "lively_eyes.configuration.tired.tooltip": "At 3 hearts or less, blinks more and, on 2-row eyes, half-closes."
+}

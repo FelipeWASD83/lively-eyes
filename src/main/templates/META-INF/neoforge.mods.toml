@@ -1,0 +1,31 @@
+modLoader="javafml"
+loaderVersion="${loader_version_range}"
+license="${mod_license}"
+
+[[mods]]
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
+authors="Felipe"
+description='''
+Acha sozinho onde estão os olhos na skin de cada jogador e dá vida a eles: piscam, olham para quem está perto, fecham
+com força ao levar dano, fecham dormindo e ficam cansados com pouca vida. Piscadela na tecla vírgula. /olhos mostra
+onde os olhos foram achados na sua skin. Só cliente.
+'''
+
+[[mixins]]
+config="${mod_id}.mixins.json"
+
+[[dependencies.${mod_id}]]
+    modId="neoforge"
+    type="required"
+    versionRange="[${neo_version_min},)"
+    ordering="NONE"
+    side="CLIENT"
+
+[[dependencies.${mod_id}]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="CLIENT"

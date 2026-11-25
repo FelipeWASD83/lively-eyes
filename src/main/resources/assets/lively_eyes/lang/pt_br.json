@@ -1,0 +1,33 @@
+{
+  "key.categories.lively_eyes": "Olhos Vivos",
+  "key.lively_eyes.wink": "Piscadela",
+
+  "lively_eyes.command.loading": "Sua skin ainda não carregou. Tenta de novo daqui a um segundo.",
+  "lively_eyes.command.found": "Olhos achados no rosto da sua skin: olho direito em %1$s, olho esquerdo em %2$s (nota %3$s).%4$s",
+  "lively_eyes.command.eye": "coluna %1$s, linha %2$s do rosto",
+  "lively_eyes.command.can_gaze": " Os olhos podem olhar para os lados.",
+  "lively_eyes.command.can_half": " Os olhos podem ficar meio fechados.",
+  "lively_eyes.command.not_found": "Não achei olhos na sua skin: %s. Ela fica sem expressões.",
+  "lively_eyes.failure.not_64x64": "a skin não é 64x64 (skins HD ficam de fora)",
+  "lively_eyes.failure.no_skin_tone": "o rosto não tem uma cor de pele clara (máscara ou capacete?)",
+  "lively_eyes.failure.no_pair": "não tem dois olhos espelhados no rosto",
+  "lively_eyes.failure.too_weak": "o melhor palpite ficou fraco demais",
+
+  "lively_eyes.configuration.title": "Olhos Vivos",
+  "lively_eyes.configuration.enabled": "Ligado",
+  "lively_eyes.configuration.enabled.tooltip": "Liga ou desliga todas as expressões.",
+  "lively_eyes.configuration.blink": "Piscar",
+  "lively_eyes.configuration.blink.tooltip": "Pisca sozinho de tempos em tempos, às vezes duas vezes seguidas.",
+  "lively_eyes.configuration.blinkMinSeconds": "Intervalo mínimo entre piscadas",
+  "lively_eyes.configuration.blinkMinSeconds.tooltip": "Em segundos.",
+  "lively_eyes.configuration.blinkMaxSeconds": "Intervalo máximo entre piscadas",
+  "lively_eyes.configuration.blinkMaxSeconds.tooltip": "Em segundos.",
+  "lively_eyes.configuration.gaze": "Olhar para os lados",
+  "lively_eyes.configuration.gaze.tooltip": "Os olhos acompanham quem está perto e de vez em quando olham para o lado. Só em skins cujo olho tem branco e íris lado a lado.",
+  "lively_eyes.configuration.hurt": "Careta de dor",
+  "lively_eyes.configuration.hurt.tooltip": "Fecha os olhos com força ao levar dano.",
+  "lively_eyes.configuration.sleep": "Dormir de olho fechado",
+  "lively_eyes.configuration.sleep.tooltip": "Olhos fechados deitado na cama.",
+  "lively_eyes.configuration.tired": "Cansado com pouca vida",
+  "lively_eyes.configuration.tired.tooltip": "Com 3 corações ou menos, pisca mais e, em olho de 2 linhas, fica meio fechado."
+}

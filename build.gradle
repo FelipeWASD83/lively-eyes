@@ -1,0 +1,104 @@
+plugins {
+    id 'java-library'
+    id 'net.neoforged.moddev' version '2.0.148'
+    id 'idea'
+}
+
+version = mod_version
+group = mod_group_id
+
+base {
+    archivesName = "${mod_id}-neoforge-1.21.1"
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+neoForge {
+    version = project.neo_version
+
+    parchment {
+        mappingsVersion = project.parchment_mappings_version
+        minecraftVersion = project.parchment_minecraft_version
+    }
+
+    runs {
+        // Opens the dev game window. Only when the owner asks for it.
+        client {
+            client()
+        }
+        configureEach {
+            logLevel = org.slf4j.event.Level.INFO
+        }
+    }
+
+    mods {
+        "${mod_id}" {
+            sourceSet(sourceSets.main)
+        }
+    }
+}
+
+dependencies {
+    // tests only touch the pure logic in dev.livelyeyes.logic (no Minecraft classes)
+    testImplementation platform('org.junit:junit-bom:5.11.4')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+// Vanilla default skins live in the client resources jar that ModDevGradle extracts; the tests read them from there
+// (they are Mojang assets, so they never get copied into this repository).
+def vanillaResources = layout.buildDirectory.file("moddev/artifacts/neoforge-${neo_version}-client-extra-aka-minecraft-resources.jar")
+def prismSkins = "${System.getenv('APPDATA')}/PrismLauncher/assets/skins"
+
+test {
+    useJUnitPlatform()
+    systemProperty 'livelyeyes.vanillaJar', vanillaResources.get().asFile.absolutePath
+    testLogging {
+        events 'failed'
+        exceptionFormat 'full'
+    }
+}
+
+// Contact sheet with every face found: original, detected eyes, and each expression. Output in build/preview.
+tasks.register('preview', JavaExec) {
+    group = 'verification'
+    description = 'Renders build/preview/faces.png from the vanilla skins and the skins cached by Prism'
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'dev.livelyeyes.logic.PreviewSheet'
+    def out = layout.buildDirectory.dir('preview')
+    args vanillaResources.get().asFile.absolutePath, prismSkins, out.get().asFile.absolutePath
+    javaLauncher = javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(21) }
+}
+
+var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
+    var replaceProperties = [
+            minecraft_version      : minecraft_version,
+            minecraft_version_range: minecraft_version_range,
+            neo_version            : neo_version,
+            neo_version_min        : neo_version_min,
+            loader_version_range   : loader_version_range,
+            mod_id                 : mod_id,
+            mod_name               : mod_name,
+            mod_license            : mod_license,
+            mod_version            : mod_version,
+    ]
+    inputs.properties replaceProperties
+    expand replaceProperties
+    from "src/main/templates"
+    into "build/generated/sources/modMetadata"
+}
+sourceSets.main.resources.srcDir generateModMetadata
+neoForge.ideSyncTask generateModMetadata
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+// Prints the face grid and band scores of the skins whose name contains -Pface=<text>. Debug aid for the detector.
+tasks.register('debugFace', JavaExec) {
+    group = 'verification'
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'dev.livelyeyes.logic.DebugFace'
+    args vanillaResources.get().asFile.absolutePath, prismSkins, (project.findProperty('face') ?: 'steve')
+    javaLauncher = javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(21) }
+}
