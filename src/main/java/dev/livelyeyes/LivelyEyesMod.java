@@ -27,7 +27,10 @@ public final class LivelyEyesMod {
     public LivelyEyesMod(IEventBus modBus, ModContainer mod) {
         mod.registerConfig(ModConfig.Type.CLIENT, Config.SPEC);
         mod.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
-        modBus.addListener((RegisterKeyMappingsEvent e) -> e.register(Expressions.WINK));
+        modBus.addListener((RegisterKeyMappingsEvent e) -> {
+            e.register(Expressions.WINK);
+            e.register(Expressions.MENU);
+        });
         // a resource pack can swap the default skins under the same name: forget what was read
         modBus.addListener((RegisterClientReloadListenersEvent e) ->
                 e.registerReloadListener((ResourceManagerReloadListener) resources -> SkinFaces.clear()));

@@ -30,8 +30,26 @@ public final class Config {
             .comment("Olhos fechados dormindo na cama.")
             .define("sleep", true);
     public static final ModConfigSpec.BooleanValue TIRED = B
-            .comment("Com 3 corações ou menos, olhos meio fechados e piscando mais (meio fechado só em olho de 2 linhas).")
+            .comment("Com 3 corações, olhos meio fechados e piscando mais (meio fechado só em olho de 2 linhas).")
             .define("tired", true);
+    public static final ModConfigSpec.BooleanValue ANGER = B
+            .comment("Sobrancelha de raiva enquanto bate em alguma coisa com um bicho ou jogador na frente.")
+            .define("anger", true);
+    public static final ModConfigSpec.BooleanValue CRY = B
+            .comment("Chora (lágrima escorrendo e olho meio fechado) com 2 corações ou menos.")
+            .define("cry", true);
+    public static final ModConfigSpec.BooleanValue BLUSH = B
+            .comment("Bochecha vermelha e olhar desviado com outro jogador bem perto, de frente.")
+            .define("blush", true);
+    public static final ModConfigSpec.BooleanValue SURPRISE = B
+            .comment("Olho arregalado pegando fogo ou despencando.")
+            .define("surprise", true);
+    public static final ModConfigSpec.BooleanValue HAPPY = B
+            .comment("Olho fechado sorrindo e bochecha corada comendo ou bebendo.")
+            .define("happy", true);
+    public static final ModConfigSpec.BooleanValue COLD = B
+            .comment("Bochecha azulada e olho semicerrado congelando (neve fofa).")
+            .define("cold", true);
 
     public static final ModConfigSpec SPEC = B.build();
 
@@ -40,6 +58,7 @@ public final class Config {
 
     public static ExpressionController.Settings settings() {
         return new ExpressionController.Settings(BLINK.get(), BLINK_MIN.get(), BLINK_MAX.get(), GAZE.get(),
-                HURT.get(), SLEEP.get(), TIRED.get());
+                HURT.get(), SLEEP.get(), TIRED.get(), ANGER.get(), CRY.get(), BLUSH.get(), SURPRISE.get(),
+                HAPPY.get(), COLD.get());
     }
 }

@@ -1,7 +1,6 @@
 {
   "key.categories.lively_eyes": "Olhos Vivos",
   "key.lively_eyes.wink": "Piscadela",
-
   "lively_eyes.command.loading": "Sua skin ainda não carregou. Tenta de novo daqui a um segundo.",
   "lively_eyes.command.found": "Olhos achados no rosto da sua skin: olho direito em %1$s, olho esquerdo em %2$s (nota %3$s).%4$s",
   "lively_eyes.command.eye": "coluna %1$s, linha %2$s do rosto",
@@ -12,7 +11,6 @@
   "lively_eyes.failure.no_skin_tone": "o rosto não tem uma cor de pele clara (máscara ou capacete?)",
   "lively_eyes.failure.no_pair": "não tem dois olhos espelhados no rosto",
   "lively_eyes.failure.too_weak": "o melhor palpite ficou fraco demais",
-
   "lively_eyes.configuration.title": "Olhos Vivos",
   "lively_eyes.configuration.enabled": "Ligado",
   "lively_eyes.configuration.enabled.tooltip": "Liga ou desliga todas as expressões.",
@@ -29,5 +27,26 @@
   "lively_eyes.configuration.sleep": "Dormir de olho fechado",
   "lively_eyes.configuration.sleep.tooltip": "Olhos fechados deitado na cama.",
   "lively_eyes.configuration.tired": "Cansado com pouca vida",
-  "lively_eyes.configuration.tired.tooltip": "Com 3 corações ou menos, pisca mais e, em olho de 2 linhas, fica meio fechado."
+  "lively_eyes.configuration.tired.tooltip": "Com 3 corações, pisca mais e, em olho de 2 linhas, fica meio fechado.",
+  "key.lively_eyes.menu": "Menu de expressões",
+  "lively_eyes.menu.title": "Expressões",
+  "lively_eyes.menu.hint": "Clique numa e o seu rosto mostra por 3 segundos (só você vê).",
+  "lively_eyes.mood.surprised": "Surpresa",
+  "lively_eyes.mood.angry": "Raiva",
+  "lively_eyes.mood.crying": "Choro",
+  "lively_eyes.mood.happy": "Feliz",
+  "lively_eyes.mood.blushing": "Vergonha",
+  "lively_eyes.mood.cold": "Frio",
+  "lively_eyes.configuration.anger": "Raiva brigando",
+  "lively_eyes.configuration.anger.tooltip": "Sobrancelha de raiva enquanto bate em alguma coisa com um bicho ou jogador na frente.",
+  "lively_eyes.configuration.cry": "Choro com pouca vida",
+  "lively_eyes.configuration.cry.tooltip": "Com 2 corações ou menos, lágrima escorrendo e olho meio fechado.",
+  "lively_eyes.configuration.blush": "Vergonha de perto",
+  "lively_eyes.configuration.blush.tooltip": "Bochecha vermelha e olhar desviado com outro jogador bem perto, de frente.",
+  "lively_eyes.configuration.surprise": "Surpresa",
+  "lively_eyes.configuration.surprise.tooltip": "Olho arregalado pegando fogo ou despencando.",
+  "lively_eyes.configuration.happy": "Feliz comendo",
+  "lively_eyes.configuration.happy.tooltip": "Olho fechado sorrindo e bochecha corada comendo ou bebendo.",
+  "lively_eyes.configuration.cold": "Frio",
+  "lively_eyes.configuration.cold.tooltip": "Bochecha azulada e olho semicerrado congelando na neve fofa."
 }

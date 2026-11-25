@@ -69,11 +69,23 @@ public record EyeLayout(Eye left, Eye right, int skinColor, int lidColor, int la
         /** Drops what this eye cannot show, so states that would look the same share one texture. */
         public EyeState normalize(EyeState state) {
             EyeState.Openness o = state.openness();
-            if (o == EyeState.Openness.HALF && !canHalfClose()) {
+            if (o == EyeState.Openness.HALF && !canHalfClose() || o == EyeState.Openness.WIDE && top() == 0) {
                 o = EyeState.Openness.OPEN;
             }
-            int gaze = o == EyeState.Openness.CLOSED || !canGaze() ? 0 : state.gaze();
+            boolean shut = o == EyeState.Openness.CLOSED || o == EyeState.Openness.HAPPY;
+            int gaze = shut || !canGaze() ? 0 : state.gaze();
             return new EyeState(o, gaze);
+        }
+
+        /** The column a tear runs down: the iris pixel nearest the middle of the face, or the eye's middle. */
+        public int tearColumn() {
+            int best = -1;
+            for (Pixel p : pixels) {
+                if (!p.sclera() && (best < 0 || Math.abs(p.x() * 2 - 7) < Math.abs(best * 2 - 7))) {
+                    best = p.x();
+                }
+            }
+            return best >= 0 ? best : (minX() + maxX()) / 2;
         }
 
         public String describe() {
@@ -84,6 +96,12 @@ public record EyeLayout(Eye left, Eye right, int skinColor, int lidColor, int la
     }
 
     public FaceState normalize(FaceState state) {
-        return new FaceState(left.normalize(state.left()), right.normalize(state.right()));
+        FaceState.Brows brows = state.brows() == FaceState.Brows.ANGRY && Math.min(left.top(), right.top()) >= 1
+                ? FaceState.Brows.ANGRY : FaceState.Brows.NONE;
+        int lowest = Math.max(left.bottom(), right.bottom());
+        FaceState.Cheeks cheeks = lowest < FaceAnalyzer.FACE - 1 ? state.cheeks() : FaceState.Cheeks.NONE;
+        int room = FaceAnalyzer.FACE - 1 - lowest;
+        int tear = state.tear() >= 0 && room > 0 ? state.tear() % room : -1;
+        return new FaceState(left.normalize(state.left()), right.normalize(state.right()), brows, cheeks, tear);
     }
 }

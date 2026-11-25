@@ -12,12 +12,25 @@ F5. Só roda no cliente: não precisa estar no servidor, e quem não tem o mod s
   perto, de vez em quando dão uma olhada para um lado. No F5 de frente, olham para você.
 - **Careta de dor:** fecham com força quando o jogador leva dano.
 - **Dormindo:** ficam fechados na cama.
-- **Cansado:** com 3 corações ou menos, piscam o dobro e, se o olho da skin tiver 2 linhas, ficam meio fechados.
-- **Piscadela:** aperte **vírgula** para dar uma piscadela (só você vê a sua, já que o mod é só do cliente). A
-  tecla muda em Opções > Controles > Olhos Vivos.
+- **Cansado:** com 3 corações, piscam o dobro e, se o olho da skin tiver 2 linhas, ficam meio fechados.
+- **Choro:** com 2 corações ou menos, uma lágrima escorre de cada olho, que fica meio fechado.
+- **Raiva:** sobrancelha inclinada para o nariz enquanto o jogador bate em alguma coisa com um bicho ou jogador
+  na frente (dura um pouco depois do golpe).
+- **Vergonha:** bochecha vermelha e olhar desviado quando outro jogador chega bem perto, de frente.
+- **Surpresa:** olho arregalado pegando fogo ou despencando de uma altura.
+- **Feliz:** olho fechado sorrindo e bochecha corada enquanto come ou bebe.
+- **Frio:** bochecha azulada e olho semicerrado congelando na neve fofa.
+- **Piscadela:** aperte **vírgula** para dar uma piscadela.
+- **Menu de expressões:** aperte **ponto**, clique numa expressão e o seu rosto mostra ela por 3 segundos.
+
+A piscadela e o menu só aparecem para você, porque o mod é só do cliente: cada um vê no próprio jogo as reações
+que o jogo mostra para todo mundo (vida, briga, fogo, queda, comer, neve, alguém perto). As teclas mudam em
+Opções > Controles > Olhos Vivos.
 
 Olhar para os lados só acontece em skins cujo olho tem o branco e a íris lado a lado (como o Steve). Meio fechado
-só acontece em olho de 2 linhas ou mais. Olho de 1 linha só pisca inteiro.
+só acontece em olho de 2 linhas ou mais. Olho de 1 linha só pisca inteiro. Sobrancelha, bochecha e o branco da
+surpresa só são pintados em cima de pele: em skin com franja colada no olho, a raiva e a surpresa quase não
+aparecem.
 
 ## Conferir a sua skin
 
@@ -28,6 +41,9 @@ por que não achou (rosto coberto por máscara, por exemplo). Skin sem olhos ach
 
 Na lista de **Mods**, escolha **Olhos Vivos** e clique em **Config**, ou edite `config/lively_eyes-client.toml`
 com o jogo aberto. Dá para ligar e desligar cada expressão e mudar o intervalo entre piscadas.
+
+Quando várias reações valem ao mesmo tempo, ganha a primeira desta ordem: surpresa, raiva, choro, feliz,
+vergonha, frio. Dano, cama e morte vêm antes de todas.
 
 ## Instalar
 

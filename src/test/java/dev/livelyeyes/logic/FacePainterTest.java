@@ -94,15 +94,77 @@ class FacePainterTest {
     @Test
     void faceStateCodesAreUnique() {
         Set<Integer> codes = new HashSet<>();
+        int count = 0;
         for (EyeState.Openness a : EyeState.Openness.values()) {
             for (int ga = -1; ga <= 1; ga++) {
                 for (EyeState.Openness b : EyeState.Openness.values()) {
                     for (int gb = -1; gb <= 1; gb++) {
-                        codes.add(new FaceState(new EyeState(a, ga), new EyeState(b, gb)).code());
+                        for (FaceState.Brows br : FaceState.Brows.values()) {
+                            for (FaceState.Cheeks ch : FaceState.Cheeks.values()) {
+                                for (int tear = -1; tear < 7; tear++) {
+                                    codes.add(new FaceState(new EyeState(a, ga), new EyeState(b, gb), br, ch, tear)
+                                            .code());
+                                    count++;
+                                }
+                            }
+                        }
                     }
                 }
             }
         }
-        assertEquals(81, codes.size());
+        assertEquals(count, codes.size());
+    }
+
+    @Test
+    void angryBrowsSlantTowardTheNose() {
+        int[] skin = steveLike();
+        EyeLayout l = layout(skin);
+        int[] out = FacePainter.paint(skin, l, FaceState.NEUTRAL.withBrows(FaceState.Brows.ANGRY));
+        // eyes at x 1-2 and 5-6, row 4: inner brow pixels on row 3, outer ones on row 2
+        assertNotEquals(TONE, out[FaceAnalyzer.baseIndex(2, 3)]);
+        assertNotEquals(TONE, out[FaceAnalyzer.baseIndex(1, 2)]);
+        assertNotEquals(TONE, out[FaceAnalyzer.baseIndex(5, 3)]);
+        assertNotEquals(TONE, out[FaceAnalyzer.baseIndex(6, 2)]);
+        assertEquals(TONE, out[FaceAnalyzer.baseIndex(1, 3)]);
+        assertEquals(TONE, out[FaceAnalyzer.baseIndex(6, 3)]);
+        assertEquals(WHITE, out[FaceAnalyzer.baseIndex(1, 4)], "the eye itself stays open");
+    }
+
+    @Test
+    void blushTintsOnlySkinUnderTheEyes() {
+        int[] skin = steveLike();
+        int beard = 0xFF3A2410;
+        FaceAnalyzerTest.setFace(skin, 6, 5, beard);
+        EyeLayout l = layout(skin);
+        int[] out = FacePainter.paint(skin, l, FaceState.NEUTRAL.withCheeks(FaceState.Cheeks.BLUSH));
+        int cheek = out[FaceAnalyzer.baseIndex(1, 5)];
+        assertTrue(Colors.r(cheek) > Colors.r(TONE) || Colors.b(cheek) > Colors.b(TONE), "pinker than skin");
+        assertNotEquals(TONE, cheek);
+        assertEquals(beard, out[FaceAnalyzer.baseIndex(6, 5)], "beard is not skin and stays");
+        assertEquals(TONE, out[FaceAnalyzer.baseIndex(3, 5)], "between the eyes nothing changes");
+    }
+
+    @Test
+    void tearFallsDownTheIrisColumnAndWraps() {
+        int[] skin = steveLike();
+        EyeLayout l = layout(skin);
+        // eye bottom is row 4, so a tear has rows 5, 6 and 7: frame 4 wraps to frame 1 (row 6)
+        int[] out = FacePainter.paint(skin, l, FaceState.NEUTRAL.withTear(4));
+        assertNotEquals(TONE, out[FaceAnalyzer.baseIndex(2, 6)], "drop on the iris column of the left eye");
+        assertNotEquals(TONE, out[FaceAnalyzer.baseIndex(5, 6)], "and of the right eye");
+        assertEquals(TONE, out[FaceAnalyzer.baseIndex(2, 7)], "not past the drop yet");
+        assertTrue(Colors.b(out[FaceAnalyzer.baseIndex(2, 6)]) > Colors.b(TONE), "bluish");
+    }
+
+    @Test
+    void wideAddsWhiteAboveAndHappyLiftsTheLashLine() {
+        int[] skin = steveLike();
+        EyeLayout l = layout(skin);
+        int[] wide = FacePainter.paint(skin, l, FaceState.both(new EyeState(EyeState.Openness.WIDE, 0)));
+        assertEquals(WHITE, wide[FaceAnalyzer.baseIndex(1, 3)]);
+        assertEquals(WHITE, wide[FaceAnalyzer.baseIndex(2, 3)]);
+        int[] happy = FacePainter.paint(skin, l, FaceState.both(new EyeState(EyeState.Openness.HAPPY, 0)));
+        assertEquals(l.lashColor(), happy[FaceAnalyzer.baseIndex(1, 3)]);
+        assertEquals(l.lidColor(), happy[FaceAnalyzer.baseIndex(1, 4)]);
     }
 }

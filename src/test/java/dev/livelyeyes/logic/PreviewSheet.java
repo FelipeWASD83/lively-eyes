@@ -30,7 +30,15 @@ public final class PreviewSheet {
             Map.entry("meio", FaceState.both(EyeState.HALF)),
             Map.entry("olha <", FaceState.both(new EyeState(EyeState.Openness.OPEN, -1))),
             Map.entry("olha >", FaceState.both(new EyeState(EyeState.Openness.OPEN, 1))),
-            Map.entry("piscadela", new FaceState(EyeState.CLOSED, EyeState.NEUTRAL)));
+            Map.entry("piscadela", new FaceState(EyeState.CLOSED, EyeState.NEUTRAL)),
+            Map.entry("raiva", FaceState.NEUTRAL.withBrows(FaceState.Brows.ANGRY)),
+            Map.entry("choro", FaceState.both(EyeState.HALF).withTear(1)),
+            Map.entry("vergonha", FaceState.both(new EyeState(EyeState.Openness.OPEN, -1))
+                    .withCheeks(FaceState.Cheeks.BLUSH)),
+            Map.entry("surpresa", FaceState.both(new EyeState(EyeState.Openness.WIDE, 0))),
+            Map.entry("feliz", FaceState.both(new EyeState(EyeState.Openness.HAPPY, 0))
+                    .withCheeks(FaceState.Cheeks.BLUSH)),
+            Map.entry("frio", FaceState.both(EyeState.HALF).withCheeks(FaceState.Cheeks.COLD)));
 
     public static void main(String[] args) throws IOException {
         Map<String, int[]> skins = new LinkedHashMap<>(SkinFiles.vanilla(Path.of(args[0])));
